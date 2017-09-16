@@ -1,54 +1,30 @@
-# Lappsgrid Services DSL Start
+# Lappsgrid Services DSL Starter Pack
 
-The Lappsgrid Services DSL is a Groovy based domain specific language that can be used to quickly prototype, develop, and test LAPPS Grid SOAP web services.  Since Groovy is a JVM language all Java libraries and modules can be used in Groovy, and in turn in LSD scripts.
+Use this project to test your LSD installation and write [LSD scripts](Intro.md) in any IDE that supports Groovy and Maven projects.
 
-Groovy is typically easy for Java programmers to pick up as the Groovy compiler also accepts (most) Java syntax, so if you don't know Groovy syntax just use Java syntax. 
+## Test the project
 
-More information on Groovy can be found [here](http://groovy-lang.org).
+Open the *Example* class in the `src/main/groovy` directory and run the `main` method.  The `main` method does the following:
 
-## Groovy for Java programmers
+1. Creates a LIF [Container](http://wiki.lappsgrid.org/org.lappsgrid.serialization/groovydoc/org/lappsgrid/serialization/lif/Container.html) object and sets the `text` and `language` properties
+1. Creates a  [Data](http://wiki.lappsgrid.org/org.lappsgrid.serialization/groovydoc/org/lappsgrid/serialization/Data.html) object and adds the above container as the `payload`.
+1. Creates two [service clients](http://wiki.lappsgrid.org/org.lappsgrid.client/apidocs/org/lappsgrid/client/ServiceClient.html); one that calls a Stanford tokenizer and another that calls a Stanford part of speech tagger.
+1. Calls each of the above services in turn.  The output of the tokenizer is passed directly to the part of speech tagger.
+1. Parses the JSON returned from the part of speech tagger back into a `Data` object.
+1. Iterates over all of the [Annotation](http://wiki.lappsgrid.org/org.lappsgrid.serialization/groovydoc/org/lappsgrid/serialization/lif/Annotation.html) objects and prints out a few features of each.
 
-### Collections
+# Create a new script
 
-Groovy provides a short method for declaring ArrayList and HashMap instances:
+When you want to develop a new script:
+ 
+1. create a new Groovy class in the `src/main/groovy` directory.
+1. add a `static void main(String[] args)` method to the class created above.
+1. copy/paste all the import statement from the top of the `Example` class.
 
-```groovy
-// In Groovy
-def list = []
-def map = [:]
 
-// In Java
-List list = new ArrayList();
-HashMap map = new HashMap();
-```
-Note that Groovy does not require that lines be terminated with a semi-colon.
 
-It is also possible to initialize a list or hash map when it is declared:
-```groovy
-def list = ['one', 'two', 'three']
-def map = [key1:'value1', key2:'value2']
-```
 
-The the keys for a Map are String objects then the key can be used as if it was a property of the Map class.  Array style syntax can also be used to set/get values from the Map.
-```groovy
-def map = [:]
-map.key = 'value1'
 
-// Is the same as
-map['key'] = 'value1'
-
-// Is the same as
-map.put('key', 'value1')
-```
-
-### Groovy String
-
-In Groovy single quotes can be used to declare String objects.
-
-```groovy
-String hello = 'Hello world'
-String goodbye = "Goodbye cruel world"
-```
 
 
 

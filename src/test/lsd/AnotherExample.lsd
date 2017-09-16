@@ -1,0 +1,22 @@
+#!/usr/bin/env lsd
+
+// How the code from AnotherExample.groovy should be structured in a LSD script.
+// The return statement is not strictly required but it is useful to mark the
+// end of the main script body.
+def setup = new Helper(action:'setup')
+def magic = new Helper(action:'do some magic here')
+def cleanup = new Helper(action: 'cleanup')
+act(setup, magic, cleanup)
+return
+
+void act(Helper... actions) {
+	actions.each { it.help() }
+}
+
+class Helper {
+    String action
+
+    void help() {
+        println "Performing $action"
+    }
+}

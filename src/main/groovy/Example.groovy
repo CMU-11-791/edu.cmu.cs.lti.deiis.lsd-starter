@@ -39,20 +39,20 @@ class Example {
         container.text = "Karen flew to New York."
         container.language = "en"
         Data data = new Data(Uri.LIF, container)
-
         println "Running the tokenizer"
         String json = tokenizer.execute(data.asJson())
         println "Running the tagger"
         json = tagger.execute(json)
+        data = Serializer.parse(json)
 
-        // One way to pretty pring JSON
-        println groovy.json.JsonOutput.prettyPrint(json)
+        // One way to pretty print JSON
+        //println groovy.json.JsonOutput.prettyPrint(json)
 
         // Another way to pretty print JSON
-        data = Serializer.parse(json)
-        println data.asPrettyJson()
+        //println data.asPrettyJson()
 
         // Iterate over all annotations in the last view and print some features.
+        // First we need to create a Container from the  payload (a java.lang.Map).
         container = new Container(data.payload)
         container.views[-1].annotations.each { Annotation a ->
             println "${a.id} ${a.features.pos} ${a.features.word}"
